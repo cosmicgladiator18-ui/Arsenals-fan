@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>World Cup 2026</title>
+<style>
+:root{--bg:#041636;--surface:rgba(255,255,255,.12);--surface-strong:rgba(255,255,255,.18);--text:#eef2fb;--accent:#ffcb05;--accent-soft:rgba(255,203,5,.14);--border:rgba(255,255,255,.16);--shadow:0 24px 60px rgba(0,0,0,.22);--link:#8cd0ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#183e95 0%,#041636 38%,#02070f 100%);color:var(--text)}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 80% 15%,rgba(255,203,5,.12),transparent 18%),radial-gradient(circle at 20% 22%,rgba(255,255,255,.08),transparent 22%);pointer-events:none}
+header{position:relative;z-index:1;padding:34px 24px 20px;text-align:center}
+header h1{margin:0;font-size:3rem;letter-spacing:.08em;text-transform:uppercase}
+header p{margin:18px auto 0;max-width:760px;line-height:1.75;color:rgba(238,242,251,.84)}
+nav{margin:26px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+nav a{padding:11px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.1);color:rgba(238,242,251,.82);text-decoration:none;transition:.24s ease}
+nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+main{max-width:1180px;margin:0 auto;padding:26px}
+section{margin-top:34px}
+.hero{display:grid;grid-template-columns:1.4fr .8fr;gap:24px;align-items:start}
+.card{background:var(--surface);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:26px;padding:28px;box-shadow:var(--shadow);transition:transform .3s ease,box-shadow .3s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 28px 72px rgba(0,0,0,.24)}
+.hero-card{display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+.hero-card h2{margin:0;font-size:2.7rem;line-height:1.05}
+.hero-card p{margin:0;line-height:1.85;color:rgba(238,242,251,.92)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.stat{padding:22px;border-radius:20px;background:rgba(255,255,255,.08);text-align:center}
+.stat strong{display:block;font-size:2.2rem;color:var(--accent)}
+.stat span{display:block;margin-top:10px;font-size:1rem;color:rgba(238,242,251,.78)}
+.countdown{display:grid;gap:18px}
+.countdown h3{margin:0;font-size:1.3rem;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.countdown-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:24px 18px;text-align:center;transition:transform .25s ease}
+.countdown-item:hover{transform:translateY(-3px)}
+.countdown-item strong{display:block;font-size:2.1rem;color:#fff}
+.countdown-item small{display:block;margin-top:8px;font-size:.86rem;color:rgba(238,242,251,.72);text-transform:uppercase;letter-spacing:.08em}
+section h2{margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.14);font-size:1.75rem}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card h3{margin:0 0 12px;font-size:1.28rem}
+.card p{margin:0;color:rgba(238,242,251,.86);line-height:1.75}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.92rem;font-weight:700}
+.feature-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.feature{padding:22px;border-radius:22px;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.1)}
+.feature strong{display:block;font-size:1.45rem;color:#fff}
+.feature p{margin:12px 0 0;font-size:.97rem;color:rgba(238,242,251,.82);line-height:1.75}
+.notice{padding:20px 24px;border-radius:22px;background:rgba(255,203,5,.08);border:1px solid rgba(255,203,5,.24);color:#fff;margin-top:18px}
+footer{margin:44px 0 24px;padding:22px 18px;text-align:center;color:rgba(238,242,251,.72);font-size:.96rem}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){header h1{font-size:2.5rem}.nav a{font-size:.95rem}.countdown-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}}
+</style>
+<script>
+const kickoff = new Date("2026-06-11T18:00:00Z");
+function updateCountdown(){
+  const now = new Date();
+  const diff = Math.max(0, kickoff - now);
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor(diff % 86400000 / 3600000);
+  const minutes = Math.floor(diff % 3600000 / 60000);
+  const seconds = Math.floor(diff % 60000 / 1000);
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+}
+window.addEventListener("load", () => {
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>FIFA World Cup 2026</h1>
+  <p>North America's biggest football festival: 48 teams, 16 host cities, and 104 matches across Canada, Mexico, and the United States.</p>
+  <nav>
+    <a href="#host-cities">Host Cities</a>
+    <a href="#format-facts">Format</a>
+    <a href="#teams">Teams</a>
+    <a href="#matchups">Matchups</a>
+    <a href="#fan-experience">Fan Zone</a>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <article class="card hero-card">
+      <div>
+        <span class="badge">Official Fan Preview</span>
+        <h2>Countdown to a new World Cup era</h2>
+        <p>From the opening ceremony to the final whistle, this page celebrates host venues, rising stars, and unforgettable matchups brewing for 2026.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>48</strong><span>Teams</span></div>
+        <div class="stat"><strong>16</strong><span>Host cities</span></div>
+        <div class="stat"><strong>104</strong><span>Matches</span></div>
+      </div>
+      <div class="notice">Tip: Scroll or use the menu above to jump to stadium highlights, format updates, and fan experiences.</div>
+    </article>
+    <aside class="card countdown">
+      <h3>Live kickoff timer</h3>
+      <div class="countdown-grid">
+        <div class="countdown-item"><strong id="days">000</strong><small>Days</small></div>
+        <div class="countdown-item"><strong id="hours">00</strong><small>Hours</small></div>
+        <div class="countdown-item"><strong id="minutes">00</strong><small>Minutes</small></div>
+        <div class="countdown-item"><strong id="seconds">00</strong><small>Seconds</small></div>
+      </div>
+    </aside>
+  </section>
+  <section id="host-cities">
+    <h2>Host city showcase</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Toronto</h3>
+        <p>BMO Field becomes a vibrant Canadian stage for opening-day fans and citywide festival programming.</p>
+      </article>
+      <article class="card">
+        <h3>Mexico City</h3>
+        <p>Estadio Azteca returns with legendary passion, ready for group-stage drama and iconic knockout moments.</p>
+      </article>
+      <article class="card">
+        <h3>Los Angeles</h3>
+        <p>SoFi Stadium offers cutting-edge hosting capability and a global entertainment experience.</p>
+      </article>
+      <article class="card">
+        <h3>New Jersey</h3>
+        <p>MetLife Stadium opens the tournament and stands as a symbol of North American football unity.</p>
+      </article>
+    </div>
+  </section>
+  <section id="format-facts">
+    <h2>Format and fast facts</h2>
+    <div class="feature-list">
+      <div class="feature"><strong>New group stage</strong><p>16 groups of three teams, with the top two advancing to a 32-team knockout bracket.</p></div>
+      <div class="feature"><strong>Expanded knockout</strong><p>32 teams move on from the groups, increasing the tournament’s drama and unpredictability.</p></div>
+      <div class="feature"><strong>Three-country hosting</strong><p>The first FIFA World Cup across Canada, Mexico, and the United States.</p></div>
+      <div class="feature"><strong>Fan celebration</strong><p>Public viewing areas, live performances, and cultural festivals will accompany every match.</p></div>
+    </div>
+  </section>
+  <section id="teams">
+    <h2>Teams to follow</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Argentina</h3>
+        <p>Defending champions with veteran leadership and a championship mentality.</p>
+      </article>
+      <article class="card">
+        <h3>Brazil</h3>
+        <p>A perennial favorite blending attacking flair, pace, and a championship pedigree.</p>
+      </article>
+      <article class="card">
+        <h3>United States</h3>
+        <p>Home-field advantage, youthful stars, and a growing soccer culture make them a top story.</p>
+      </article>
+      <article class="card">
+        <h3>Mexico</h3>
+        <p>Passionate home fans and stadium energy make Mexico one of the tournament's most exciting squads.</p>
+      </article>
+    </div>
+  </section>
+  <section id="matchups">
+    <h2>Key matchups</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>USA vs Mexico</h3>
+        <p>A classic North American derby full of rivalry, pride, and electric atmospheres.</p>
+      </article>
+      <article class="card">
+        <h3>Canada vs Brazil</h3>
+        <p>A rising Canada side meets South American flair in a modern tournament showdown.</p>
+      </article>
+      <article class="card">
+        <h3>Germany vs France</h3>
+        <p>Two European powerhouses collide in a matchup likely to shape the knockout bracket.</p>
+      </article>
+    </div>
+  </section>
+  <section id="fan-experience">
+    <h2>Fan experience</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Fan zones</h3>
+        <p>Citywide viewing parties, live music, and cultural showcases across all host venues.</p>
+      </article>
+      <article class="card">
+        <h3>Travel tips</h3>
+        <p>Plan stadium transfers, local cuisine stops, and matchday timing across three countries.</p>
+      </article>
+      <article class="card">
+        <h3>Legacy</h3>
+        <p>New stadium upgrades and infrastructure investments will support football for years to come.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>World Cup 2026 fan page refined with strong visual hierarchy, navigation, and richer tournament content.</p>
+  <p><a href="https://www.fifa.com/worldcup" target="_blank" rel="noreferrer">Official FIFA World Cup 2026</a></p>
+</footer>
+</body>
+</html>
